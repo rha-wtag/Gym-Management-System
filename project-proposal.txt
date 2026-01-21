@@ -1,0 +1,94 @@
+Project Title: GymOS (Gym Management System)
+Objective:
+Develop a platform that connects Admins, Trainers, and Members to manage memberships, classes, trainer schedules, payments, inventory, and support—while ensuring secure access, reliable notifications, and clear operational workflows.
+Features
+User Management
+User Roles: Member, Trainer, Admin.
+Provisioning & Authentication:
+Admin-created accounts; temp password emailed; force password change on first login.
+Password reset flow.
+
+
+Profile Management (Member):
+Basic info, photo, emergency contact, health flags.
+Membership snapshot (plan, status, renewal date, perks).
+Access entitlements (facilities allowed: sauna, pool, etc).
+Programs (diet & workout) read-only for members, maintained by trainers.
+
+
+Account State:
+Auto-inactive if no valid payment; soft-delete supported.
+
+
+Admin Panel
+Members:
+Create/update members; toggle active/inactive.
+Inventory Management:
+SKUs/variants; stock adjustments.
+Staff Management:
+Create trainers & support staff; assign roles/permissions.
+Classes Management:
+Create classes (e.g., Zumba); set description/tags, instructor, room, capacity, schedule.
+Reschedule/cancel with reason; auto-notify affected members.
+Payments (Back Office):
+Record cash payments; auto-generate invoices; send email receipts.
+Leads (Membership Applications):
+Public application form; items appear in admin inbox for personal follow-up.
+Compliance/Reporting:
+Audit log (who changed what, when); reports for renewals due, class fill rate, low-stock.
+Leave Approvals:
+Approve/deny trainer leave; trigger reschedule/cancel workflows.
+
+
+Trainer Portal
+Provisioning:
+Admin creates account; temp password; force change on first login.
+Profile:
+Bio, specialties, certifications (file uploads); hourly rate (admin-only field).
+Schedules & Leave:
+View schedule; apply leave (admin approval workflow).
+Clients & Programs:
+List assigned clients; edit client diet charts & routines.
+Class Controls:
+Reschedule/cancel with reason; system notifies booked members automatically.
+
+
+Classes & Scheduling
+Class Model:
+Title, description, tags (strength/cardio), instructor & support staff, room, capacity.
+Schedules:
+One-off or recurring entries; booking window; cancellation policy.
+Attendees & Waitlist
+Members can book/cancel; if full, join the waitlist.
+
+
+Memberships
+Plan Catalog:
+Name, price, interval, perks.
+Roster & Status:
+View members per plan.
+Data Retention:
+If inactive > 6 months, delete user via Rufus Scheduler (with audit entry).
+Payments & Billing
+Online Renewal (Member):
+Renew membership using bKash (sandbox); on success generate invoice; email PDF payslip + receipt.
+Class Purchases:
+Buy class packs or one-off bookings; invoices and receipts issued.
+
+
+Notifications
+Automated Emails (Sidekiq):
+Welcome/profile creation; payment confirmations (with PDFs).
+Class booking/reschedule/cancel.
+Trainer leave approvals impacting classes.
+
+
+Job Scheduling
+Rufus Scheduler:
+Nightly purge for inactive > 6 months; daily digests (renewals due, low stock, open tickets).
+Sidekiq Jobs:
+Email dispatch; PDF invoice generation; waitlist promotion; trainer-leave impact notifications; payment webhook processing with retries.
+Technologies:
+Frontend: HTML, CSS, Ruby on Rails
+Backend: Ruby on Rails
+Database: PostgreSQL
