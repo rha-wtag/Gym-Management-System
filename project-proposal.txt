@@ -6,7 +6,7 @@ User Management
 User Roles: Member, Trainer, Admin.
 Provisioning & Authentication:
 Admin-created accounts; temp password emailed; force password change on first login.
-Password reset flow.
+Password reset flow.  
 
 
 Profile Management (Member):
